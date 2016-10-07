@@ -1,4 +1,4 @@
-import get_mouse_move
+from get_mouse_move import get_mouse_move
 import mathutils
 import bge
 
@@ -6,7 +6,7 @@ class get_direction():
 
     def __init__(self, parent):
         
-        self.mouse_rotation = get_mouse_move.get_mouse_move()
+        self.mouse_rotation = get_mouse_move()
         
         self.rotation_matrix = mathutils.Matrix().to_3x3()
         self.rotation_matrix.col[0] = mathutils.Vector((1,0,0))

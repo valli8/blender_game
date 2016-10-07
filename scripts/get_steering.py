@@ -1,10 +1,10 @@
-import get_keys
 import mathutils
+from get_keys import get_keys
 
 class get_steering():
     
     def __init__(self):
-        self.keys = get_keys.get_keys()
+        self.keys = get_keys()
     
     def get_fps_direction_vector_value(self):
         

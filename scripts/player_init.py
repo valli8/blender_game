@@ -1,12 +1,12 @@
 import bge
-import car
-import get_player_controls
 import cProfile, pstats, io, time, profile
+from car import car
+from get_player_controls import get_player_controls
 
 class player_init():
     def __init__(self, position):
-        self.player = car.car(position)
-        self.controls = get_player_controls.get_player_controls(self.player)
+        self.player = car(position)
+        self.controls = get_player_controls(self.player)
         if not "team1" in bge.logic.globalDict:
             bge.logic.globalDict['team1'] = []
         bge.logic.globalDict['team1'].append(self.player)
