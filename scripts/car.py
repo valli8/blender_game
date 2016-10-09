@@ -38,17 +38,17 @@ class fire():
         
     def update(self, game_object, orders):
         
-        if orders["fire"] != 0:
+        if self.cooldown > 100:
+            if orders["fire"] != 0:
+                self.cooldown = 0
+                force = orders["head_direction"]*game_object.mass*10000.0
+                game_object.setLinearVelocity(mathutils.Vector([0,0,0]),False)
+                game_object.applyForce(force.col[1], False)
+        else:
             self.cooldown+=1
-        elif self.cooldown > 100:
-            self.cooldown = 0
-            force = orders["head_direction"]*game_object.mass*10000.0
-            game_object.setLinearVelocity(mathutils.Vector([0,0,0]),False)
-            game_object.applyForce(force.col[1], False)
             
             
 class car():
-
     def __init__(self, worldPosition):
         self.scene = bge.logic.getCurrentScene()
         
