@@ -20,7 +20,7 @@ class get_direction():
         self.camera = scene.active_camera
         self.camera.setParent(parent)
 
-    def get_fps_direction(self, up = mathutils.Vector((0, 0, 1))):
+    def get_fps_direction(self, up=mathutils.Vector((0, 0, 1))):
 
         x_rot, y_rot = self.mouse_rotation.update()
 
@@ -46,7 +46,7 @@ class get_direction():
 
         return self.rotation_matrix
 
-    def get_free_direction(self, up = mathutils.Vector((0, 0, 1))):
+    def get_free_direction(self, up=mathutils.Vector((0, 0, 1))):
 
         x_rot, y_rot = self.mouse_rotation.update()
 

@@ -36,7 +36,8 @@ def main(controller):
             owner["init"] = player_init(owner.worldPosition)
             bge.logic.pr.disable()
             bge.logic.s = io.StringIO()
-            bge.logic.ps = pstats.Stats(bge.logic.pr, stream = bge.logic.s).sort_stats('tottime')
+            bge.logic.ps = pstats.Stats(bge.logic.pr, stream=bge.logic.s).\
+                sort_stats('tottime')
         else:
             owner["init"] = player_init(owner.worldPosition)
     else:
@@ -44,7 +45,8 @@ def main(controller):
             bge.logic.pr.enable()
             owner["init"].update()
             bge.logic.pr.disable()
-            bge.logic.ps = pstats.Stats(bge.logic.pr, stream=bge.logic.s).sort_stats('tottime') #tottime,cumulative
+            bge.logic.ps = pstats.Stats(bge.logic.pr, stream=bge.logic.s).\
+                sort_stats('tottime')  # or cumulative
 
             if bge.logic.print_counter >= 500:
                 bge.logic.ps.print_stats()

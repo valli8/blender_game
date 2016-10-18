@@ -59,11 +59,11 @@ class car():
         self.collision["player"] = self
 
     def update(self, orders):
-        self.move(orders)
+        self.__move(orders)
         self.head.update(self.collision, orders)
         self.fire.update(self.collision, orders)
 
-    def move(self, orders):
+    def __move(self, orders):
         self.visible.worldTransform = self.collision.worldTransform
 
         if orders["speed"] > 0:
