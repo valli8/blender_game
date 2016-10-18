@@ -1,7 +1,10 @@
 import bge
-import cProfile, pstats, io, time, profile
+import cProfile
+import pstats
+import io
 from car import car
 from get_player_controls import get_player_controls
+
 
 class player_init():
     def __init__(self, position):
@@ -11,43 +14,43 @@ class player_init():
             bge.logic.globalDict['team1'] = []
         bge.logic.globalDict['team1'].append(self.player)
         #print(bge.logic.globalDict['team1'])
-        
+
     def update(self):
         orders = self.controls.update()
         self.player.update(orders)
-        
-        if hasattr(bge.logic,'energybar'):
+
+        if hasattr(bge.logic, 'energybar'):
             bge.logic.energybar.setBar(self.player.fire.cooldown)
-            
+
+
 def main(controller):
     owner = controller.owner
-    
+
     profiling = False
-    
+
     if not "init" in owner:
-        
-        if profiling == True:
+        if profiling:
             bge.logic.print_counter = 1
             bge.logic.pr = cProfile.Profile()
             bge.logic.pr.enable()
             owner["init"] = player_init(owner.worldPosition)
             bge.logic.pr.disable()
             bge.logic.s = io.StringIO()
-            bge.logic.ps = pstats.Stats(bge.logic.pr, stream=bge.logic.s).sort_stats('tottime')
+            bge.logic.ps = pstats.Stats(bge.logic.pr, stream = bge.logic.s).sort_stats('tottime')
         else:
             owner["init"] = player_init(owner.worldPosition)
     else:
-        if profiling == True:
+        if profiling:
             bge.logic.pr.enable()
             owner["init"].update()
             bge.logic.pr.disable()
             bge.logic.ps = pstats.Stats(bge.logic.pr, stream=bge.logic.s).sort_stats('tottime') #tottime,cumulative
-            
+
             if bge.logic.print_counter >= 500:
                 bge.logic.ps.print_stats()
-                print(bge.logic.s.getvalue())
+                print((bge.logic.s.getvalue()))
                 bge.logic.print_counter = 1
             else:
-                bge.logic.print_counter+=1
+                bge.logic.print_counter += 1
         else:
             owner["init"].update()
