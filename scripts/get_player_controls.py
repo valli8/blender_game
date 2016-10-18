@@ -1,8 +1,8 @@
 import bge
 import mathutils
-from get_steering import get_steering
-from get_direction import get_direction
-from get_keys import get_keys
+from scripts.get_steering import get_steering
+from scripts.get_direction import get_direction
+from scripts.get_keys import get_keys
 
 
 class get_player_controls():

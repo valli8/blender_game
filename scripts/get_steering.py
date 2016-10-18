@@ -1,5 +1,5 @@
 import mathutils
-from get_keys import get_keys
+from scripts.get_keys import get_keys
 
 
 class get_steering():

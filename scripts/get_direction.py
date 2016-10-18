@@ -1,4 +1,4 @@
-from get_mouse_move import get_mouse_move
+from scripts.get_mouse_move import get_mouse_move
 import mathutils
 import bge
 

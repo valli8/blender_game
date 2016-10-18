@@ -2,8 +2,8 @@ import bge
 import cProfile
 import pstats
 import io
-from car import car
-from get_player_controls import get_player_controls
+from scripts.car import car
+from scripts.get_player_controls import get_player_controls
 
 
 class player_init():
