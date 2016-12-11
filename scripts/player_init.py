@@ -9,14 +9,18 @@ from scripts.get_player_controls import get_player_controls
 class player_init():
     def __init__(self, position):
         self.player = car(position)
-        self.controls = get_player_controls(self.player)
+        self.controls = get_player_controls()
         if not "team1" in bge.logic.globalDict:
             bge.logic.globalDict['team1'] = []
         bge.logic.globalDict['team1'].append(self.player)
-        #print(bge.logic.globalDict['team1'])
+
+        self.scene = bge.logic.getCurrentScene()
+        self.camera = self.scene.active_camera
+
+        self.camera.setParent(self.player.head.mesh)
 
     def update(self):
-        orders = self.controls.update()
+        orders = self.controls.update(self.player.up)
         self.player.update(orders)
 
         if hasattr(bge.logic, 'energybar'):

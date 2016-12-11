@@ -68,16 +68,12 @@ class car():
 
         if orders["speed"] > 0:
             # rotate direction vector by head matrix. (local -> world)
-
-            #print("1",orders["body_direction"])
             orders["body_direction"].rotate(self.head.mesh.worldTransform)
-            #print("2",orders["body_direction"])
 
             direction_velocity = self.collision.getLinearVelocity().\
             copy().project(orders["body_direction"])
 
             speed_diff = self.max_speed - direction_velocity.magnitude
-            #print((direction_velocity.magnitude,speed_diff))
             if speed_diff > self.speed:
                 self.collision.applyForce(orders["body_direction"] *
                 orders["speed"] * self.speed * self.collision.mass, False)

@@ -18,11 +18,8 @@ class get_steering():
             vec[1] += 1
         if ((self.keys.get('bwd') == 1) or (self.keys.get('bwd') == 2)):
             vec[1] -= 1
-        #if ((self.keys.get('up') == 1) or (self.keys.get('up') == 2)):
-        #    vec[2] += 1
-        #if ((self.keys.get('down') == 1) or (kself.keys.get('down') == 2)):
-        #    vec[2] -= 1
 
+        # check movement
         if vec[0] == 0 and vec[1] == 0:
             value = 0.0
             vec[1] = 1
@@ -49,6 +46,7 @@ class get_steering():
         if ((self.keys.get('down') == 1) or (self.keys.get('down') == 2)):
             vec[2] -= 1
 
+        # check movement
         if vec[0] == 0 and vec[1] == 0 and vec[2] == 0:
             value = 0.0
             vec[1] = 1

@@ -1,4 +1,3 @@
-import bge
 import mathutils
 from scripts.get_steering import get_steering
 from scripts.get_direction import get_direction
@@ -6,17 +5,9 @@ from scripts.get_keys import get_keys
 
 
 class get_player_controls():
-    def __init__(self, object):
-
-        self.controlled_object = object
+    def __init__(self):
         self.steering = get_steering()
-        self.direction = get_direction(self.controlled_object.head.mesh)
-
-        self.scene = bge.logic.getCurrentScene()
-        self.camera = self.scene.active_camera
-
-        self.camera.setParent(object.head.mesh)
-
+        self.direction = get_direction()
         self.keys = get_keys()
 
         self.orders = {
@@ -28,10 +19,12 @@ class get_player_controls():
             "alt": 0
         }
 
-    def update(self):
+    def update(self, up=mathutils.Vector((0, 0, 1))):
         self.orders["body_direction"], self.orders["speed"] = \
             self.steering.get_free_direction_vector_value()
+        #self.orders["head_direction"] = \
+        #    self.direction.get_free_direction()
         self.orders["head_direction"] = \
-            self.direction.get_fps_direction(self.controlled_object.up)
+            self.direction.get_fps_direction(up)
         self.orders["fire"] = self.keys.get("fire")
         return self.orders
