@@ -1,12 +1,23 @@
+'''
+This script has to be attached to a blender object.
+Add a alwas-sensor with true level triggering (pulse mode) and add
+"scripts.PlayerInit.main"
+to a python controller with execution method = module.
+
+'''
+
+
 import cProfile
 import pstats
 import io
+# pylint: disable=import-error
 import bge
 from scripts.Car import Car
 from scripts.GetPlayerControls import GetPlayerControls
 
 
 class PlayerInit(object):
+    '''This class initializes a new player.'''
     def __init__(self, position):
         self.player = Car(position)
         self.controls = GetPlayerControls()
@@ -20,6 +31,7 @@ class PlayerInit(object):
         self.camera.setParent(self.player.head.mesh)
 
     def update(self):
+        '''Update every tic'''
         orders = self.controls.update(self.player.up)
         self.player.update(orders)
 
@@ -28,6 +40,7 @@ class PlayerInit(object):
 
 
 def main(controller):
+    '''main entry point'''
     owner = controller.owner
 
     profiling = False
@@ -42,7 +55,8 @@ def main(controller):
 
             if bge.logic.print_counter >= 500:
                 bge.logic.ps.print_stats()
-                bge.logic.print_counter = 1
+                print((bge.logic.s.getvalue()))
+                bge.logic.print_counter = 0
             else:
                 bge.logic.print_counter += 1
         else:

@@ -1,23 +1,33 @@
+'''
+This module contains all classes for the car object
+'''
+# pylint: disable=import-error
+
 import bge
 import mathutils
 
 
 class Head(object):
+    '''The head object is used for two things:
+        - Attach the camera to.
+        - Get relative movement.'''
     def __init__(self):
         scene = bge.logic.getCurrentScene()
         self.mesh = scene.addObject("head")
 
     def update(self, game_object, orders):
+        '''update ever tic.'''
         self.mesh.worldOrientation = orders["head_direction"]
         self.mesh.worldPosition = game_object.worldPosition
 
 
 class Fire(object):
+    '''Do some action when fire is activated.'''
     def __init__(self):
         self.cooldown = 0
 
     def update(self, game_object, orders):
-
+        '''update every tic'''
         if self.cooldown > 100:
             if orders["fire"] != 0:
                 self.cooldown = 0
@@ -30,7 +40,10 @@ class Fire(object):
 
 
 class Car(object):
+    '''car funktionality'''
+    # pylint: disable=too-many-instance-attributes
     def __init__(self, worldPosition):
+
         self.scene = bge.logic.getCurrentScene()
 
         # add collision mesh
@@ -59,11 +72,13 @@ class Car(object):
         self.collision["player"] = self
 
     def update(self, orders):
+        '''uptade on every tic.'''
         self.__move(orders)
         self.head.update(self.collision, orders)
         self.fire.update(self.collision, orders)
 
     def __move(self, orders):
+        '''movement.'''
         self.visible.worldTransform = self.collision.worldTransform
 
         if orders["speed"] > 0:
