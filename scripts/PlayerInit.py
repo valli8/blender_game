@@ -38,6 +38,9 @@ class PlayerInit(object):
         if hasattr(bge.logic, 'energybar'):
             bge.logic.energybar.setBar(self.player.fire.cooldown)
 
+        if hasattr(bge.logic, 'speedometer'):
+            speed = float(self.player.collision.localLinearVelocity.length)
+            bge.logic.speedometer.setSpeed(round(speed,2))
 
 def main(controller):
     '''main entry point'''

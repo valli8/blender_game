@@ -13,6 +13,8 @@ if "bpy" in locals():
         importlib.reload(GetSteering)
     if "bar" in locals():
         importlib.reload(bar)
+    if "speedometer" in locals():
+        importlib.reload(speedometer)
     if "GetMouseMove" in locals():
         importlib.reload(GetMouseMove)
     if "GetPlayerControls" in locals():
